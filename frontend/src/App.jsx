@@ -1,9 +1,7 @@
-// App.jsx
 import React from "react";
 import PhotoListItem from "./components/PhotoListItem";
 import "./App.scss";
 
-// Array of sample data
 const photoListData = [
     {
         id: "1",

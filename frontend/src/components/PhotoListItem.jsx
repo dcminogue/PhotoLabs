@@ -1,9 +1,14 @@
-// components/PhotoListItem.jsx
 import React from "react";
 import PropTypes from "prop-types";
 
 const PhotoListItem = ({ photo }) => {
-    const { id, location, imageSource, username, profile } = photo;
+    const {
+        id = "N/A",
+        location = { city: "Unknown City", country: "Unknown Country" },
+        imageSource = "default-image.jpg",
+        username = "Unknown User",
+        profile = "default-profile.jpg",
+    } = photo;
 
     return (
         <div className="photo-list-item">
@@ -29,14 +34,14 @@ const PhotoListItem = ({ photo }) => {
 
 PhotoListItem.propTypes = {
     photo: PropTypes.shape({
-        id: PropTypes.string.isRequired,
+        id: PropTypes.string,
         location: PropTypes.shape({
-            city: PropTypes.string.isRequired,
-            country: PropTypes.string.isRequired,
-        }).isRequired,
-        imageSource: PropTypes.string.isRequired,
-        username: PropTypes.string.isRequired,
-        profile: PropTypes.string.isRequired,
+            city: PropTypes.string,
+            country: PropTypes.string,
+        }),
+        imageSource: PropTypes.string,
+        username: PropTypes.string,
+        profile: PropTypes.string,
     }).isRequired,
 };
 
