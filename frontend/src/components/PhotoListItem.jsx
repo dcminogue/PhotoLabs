@@ -2,7 +2,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const PhotoListItem = ({ id, location, imageSource, username, profile }) => {
+const PhotoListItem = ({ photo }) => {
+    const { id, location, imageSource, username, profile } = photo;
+
     return (
         <div className="photo-list-item">
             <img
@@ -17,18 +19,25 @@ const PhotoListItem = ({ id, location, imageSource, username, profile }) => {
             />
             <div className="photo-info">
                 <h2 className="username">{username}</h2>
-                <p className="location">{location}</p>
+                <p className="location">
+                    {location.city}, {location.country}
+                </p>
             </div>
         </div>
     );
 };
 
 PhotoListItem.propTypes = {
-    id: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
-    imageSource: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
-    profile: PropTypes.string.isRequired,
+    photo: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        location: PropTypes.shape({
+            city: PropTypes.string.isRequired,
+            country: PropTypes.string.isRequired,
+        }).isRequired,
+        imageSource: PropTypes.string.isRequired,
+        username: PropTypes.string.isRequired,
+        profile: PropTypes.string.isRequired,
+    }).isRequired,
 };
 
 export default PhotoListItem;

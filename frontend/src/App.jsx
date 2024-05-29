@@ -15,20 +15,12 @@ const photoListData = [
         username: "Joe Example",
         profile: `${process.env.PUBLIC_URL}/profile-1.jpg`,
     },
-    // You can add more objects as needed
 ];
 
 const App = () => (
     <div className="App">
-        {photoListData.map(data => (
-            <PhotoListItem
-                key={data.id} // Use the id as the key
-                id={data.id}
-                location={`${data.location.city}, ${data.location.country}`}
-                imageSource={data.imageSource}
-                username={data.username}
-                profile={data.profile}
-            />
+        {photoListData.map(photo => (
+            <PhotoListItem key={photo.id} photo={photo} />
         ))}
     </div>
 );
