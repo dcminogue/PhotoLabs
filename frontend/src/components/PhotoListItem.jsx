@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "../styles/PhotoListItem.scss";
 
 const PhotoListItem = ({ photo }) => {
     const {
@@ -11,22 +12,26 @@ const PhotoListItem = ({ photo }) => {
     } = photo;
 
     return (
-        <div className="photo-list-item">
+        <div className="photo-list__item">
+            {" "}
+            {/* Updated class name */}
             <img
                 src={imageSource}
                 alt={`Photo ${id}`}
-                className="photo-image"
+                className="photo-list__image"
             />
-            <img
-                src={profile}
-                alt={`${username}'s profile`}
-                className="profile-image"
-            />
-            <div className="photo-info">
-                <h2 className="username">{username}</h2>
-                <p className="location">
-                    {location.city}, {location.country}
-                </p>
+            <div className="photo-list__user-container">
+                <img
+                    src={profile}
+                    alt={`${username}'s profile`}
+                    className="photo-list__user-profile"
+                />
+                <div className="photo-list__user-details">
+                    <h2 className="photo-list__user-info">{username}</h2>
+                    <p className="photo-list__user-location">
+                        {location.city}, {location.country}
+                    </p>
+                </div>
             </div>
         </div>
     );
