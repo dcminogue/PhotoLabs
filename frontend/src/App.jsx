@@ -61,7 +61,11 @@ const photoListData = [photo1, photo2, photo3];
 const App = () => (
     <div className="App">
         {photoListData.map(photo => (
-            <PhotoListItem key={photo.id} photo={photo} />
+            <PhotoListItem
+                key={photo.id}
+                photo={photo}
+                imageSource={photo.urls.regular}
+            />
         ))}
     </div>
 );

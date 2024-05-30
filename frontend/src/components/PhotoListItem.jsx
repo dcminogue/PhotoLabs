@@ -7,10 +7,7 @@ const PhotoListItem = ({ photo }) => {
         id = "N/A",
         location: { city = "Unknown City", country = "Unknown Country" } = {},
         urls: { regular: imageSource = "default-image.jpg" } = {},
-        user: {
-            username = "Unknown User",
-            profile = "default-profile.jpg",
-        } = {},
+        user: { name = "Unknown User", profile = "default-profile.jpg" } = {},
     } = photo;
 
     return (
@@ -23,11 +20,11 @@ const PhotoListItem = ({ photo }) => {
             <div className="photo-list__user-container">
                 <img
                     src={profile}
-                    alt={`${username}'s profile`}
+                    alt={`${name}'s profile`}
                     className="photo-list__user-profile"
                 />
                 <div className="photo-list__user-details">
-                    <h2 className="photo-list__user-info">{username}</h2>
+                    <h2 className="photo-list__user-info">{name}</h2>
                     <p className="photo-list__user-location">
                         {city}, {country}
                     </p>
