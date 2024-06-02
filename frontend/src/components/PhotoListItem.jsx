@@ -12,9 +12,7 @@ const PhotoListItem = ({ photo }) => {
     } = photo;
 
     const handleFavButtonClick = isSelected => {
-        // Perform any action when the favorite button is clicked
-        console.log(`Photo ${id} favorite status: ${isSelected}`);
-    };
+     
 
     return (
         <div className="photo-list__item">

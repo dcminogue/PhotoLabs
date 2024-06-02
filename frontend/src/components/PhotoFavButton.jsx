@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import FavIcon from "./FavIcon";
 import "../styles/PhotoFavButton.scss";
@@ -8,10 +8,13 @@ function PhotoFavButton({ onClick, initialSelected = false }) {
 
     const handleClick = () => {
         setSelected(prevSelected => !prevSelected);
-        if (onClick) {
-            onClick(!selected);
-        }
     };
+
+    useEffect(() => {
+        if (onClick) {
+            onClick(selected);
+        }
+    }, [selected, onClick]);
 
     return (
         <div className="photo-list__fav-icon" onClick={handleClick}>
