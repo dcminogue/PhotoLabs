@@ -11,9 +11,7 @@ function PhotoFavButton({ onClick, initialSelected = false }) {
     };
 
     useEffect(() => {
-        if (typeof onClick === "function") {
-            onClick(selected);
-        }
+        onClick(selected);
     }, [selected, onClick]);
 
     return (
@@ -24,6 +22,10 @@ function PhotoFavButton({ onClick, initialSelected = false }) {
         </div>
     );
 }
+
+PhotoFavButton.defaultProps = {
+    onClick: () => {},
+};
 
 PhotoFavButton.propTypes = {
     onClick: PropTypes.func,

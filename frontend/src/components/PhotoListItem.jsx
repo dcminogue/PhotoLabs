@@ -15,8 +15,8 @@ const PhotoListItem = ({
 
     const handleFavButtonClick = isSelected => {
         setIsFav(isSelected);
-        // Perform any additional action when the favorite button is clicked
-        console.log(`Photo ${id} favorite status: ${isSelected}`);
+        // Perform any additional action when the favorite button is clicked, e.g., update server, state management, etc.
+        // Example: updateFavoriteStatus(id, isSelected);
     };
 
     return (
@@ -52,18 +52,18 @@ const PhotoListItem = ({
 
 PhotoListItem.propTypes = {
     photo: PropTypes.shape({
-        id: PropTypes.string,
+        id: PropTypes.string.isRequired,
         location: PropTypes.shape({
-            city: PropTypes.string,
-            country: PropTypes.string,
-        }),
+            city: PropTypes.string.isRequired,
+            country: PropTypes.string.isRequired,
+        }).isRequired,
         urls: PropTypes.shape({
-            regular: PropTypes.string,
-        }),
+            regular: PropTypes.string.isRequired,
+        }).isRequired,
         user: PropTypes.shape({
-            name: PropTypes.string,
-            profile: PropTypes.string,
-        }),
+            name: PropTypes.string.isRequired,
+            profile: PropTypes.string.isRequired,
+        }).isRequired,
     }).isRequired,
 };
 
