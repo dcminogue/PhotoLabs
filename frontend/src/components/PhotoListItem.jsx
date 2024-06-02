@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import PhotoFavButton from "./PhotoFavButton"; // Import PhotoFavButton
+import PhotoFavButton from "./PhotoFavButton";
 import "../styles/PhotoListItem.scss";
 
 const PhotoListItem = ({ photo }) => {
@@ -11,10 +11,15 @@ const PhotoListItem = ({ photo }) => {
         user: { name = "Unknown User", profile = "default-profile.jpg" } = {},
     } = photo;
 
+    const handleFavButtonClick = isSelected => {
+        // Perform any action when the favorite button is clicked
+        console.log(`Photo ${id} favorite status: ${isSelected}`);
+    };
+
     return (
         <div className="photo-list__item">
             <div className="photo-list_image_block">
-                <PhotoFavButton />
+                <PhotoFavButton onClick={handleFavButtonClick} />
                 <img
                     src={imageSource}
                     alt={`Photo ${id}`}
