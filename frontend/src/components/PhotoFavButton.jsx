@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import FavIcon from "./FavIcon";
 import "../styles/PhotoFavButton.scss";
 
-function PhotoFavButton({ onClick, initialSelected = false }) {
+function PhotoFavButton({ onFavouriteChange, initialSelected = false }) {
     const [selected, setSelected] = useState(initialSelected);
 
     const handleClick = () => {
@@ -11,8 +11,8 @@ function PhotoFavButton({ onClick, initialSelected = false }) {
     };
 
     useEffect(() => {
-        onClick(selected);
-    }, [selected, onClick]);
+        onFavouriteChange(selected);
+    }, [selected, onFavouriteChange]);
 
     return (
         <div className="photo-list__fav-icon" onClick={handleClick}>
@@ -24,11 +24,11 @@ function PhotoFavButton({ onClick, initialSelected = false }) {
 }
 
 PhotoFavButton.defaultProps = {
-    onClick: () => {},
+    onFavouriteChange: () => {},
 };
 
 PhotoFavButton.propTypes = {
-    onClick: PropTypes.func,
+    onFavouriteChange: PropTypes.func,
     initialSelected: PropTypes.bool,
 };
 

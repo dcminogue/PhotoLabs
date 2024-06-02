@@ -3,27 +3,41 @@ import PropTypes from "prop-types";
 import PhotoFavButton from "./PhotoFavButton";
 import "../styles/PhotoListItem.scss";
 
-const PhotoListItem = ({
-    photo: {
+const PhotoListItem = ({ photo }) => {
+    if (!photo) {
+        return (
+            <div className="photo-list__item--error">Photo not available</div>
+        );
+    }
+
+    const {
         id = "N/A",
         location: { city = "Unknown City", country = "Unknown Country" } = {},
         urls: { regular: imageSource = "default-image.jpg" } = {},
         user: { name = "Unknown User", profile = "default-profile.jpg" } = {},
-    },
-}) => {
+    } = photo;
+
     const [isFav, setIsFav] = useState(false);
 
     const handleFavButtonClick = isSelected => {
         setIsFav(isSelected);
-        // Perform any additional action when the favorite button is clicked, e.g., update server, state management, etc.
-        // Example: updateFavoriteStatus(id, isSelected);
+        // Perform any additional action when the favorite button is clicked
+        updateFavoriteStatus(id, isSelected);
+    };
+
+    const updateFavoriteStatus = (photoId, isFavorited) => {
+        // Example implementation of updating favorite status
+        console.log(
+            `Photo ${photoId} favorite status updated to: ${isFavorited}`
+        );
+        // This is where you would make an API call or update global state
     };
 
     return (
         <div className="photo-list__item">
             <div className="photo-list_image_block">
                 <PhotoFavButton
-                    onClick={handleFavButtonClick}
+                    onFavouriteChange={handleFavButtonClick}
                     initialSelected={isFav}
                 />
                 <img
