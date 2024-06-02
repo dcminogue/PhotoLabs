@@ -11,7 +11,7 @@ function PhotoFavButton({ onClick, initialSelected = false }) {
     };
 
     useEffect(() => {
-        if (onClick) {
+        if (typeof onClick === "function") {
             onClick(selected);
         }
     }, [selected, onClick]);

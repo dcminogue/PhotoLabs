@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import PhotoFavButton from "./PhotoFavButton";
 import "../styles/PhotoListItem.scss";
 
-const PhotoListItem = ({ photo }) => {
-    const {
+const PhotoListItem = ({
+    photo: {
         id = "N/A",
         location: { city = "Unknown City", country = "Unknown Country" } = {},
         urls: { regular: imageSource = "default-image.jpg" } = {},
         user: { name = "Unknown User", profile = "default-profile.jpg" } = {},
-    } = photo;
-
+    },
+}) => {
     const [isFav, setIsFav] = useState(false);
 
     const handleFavButtonClick = isSelected => {
@@ -61,7 +61,7 @@ PhotoListItem.propTypes = {
             regular: PropTypes.string,
         }),
         user: PropTypes.shape({
-            username: PropTypes.string,
+            name: PropTypes.string,
             profile: PropTypes.string,
         }),
     }).isRequired,
