@@ -1,14 +1,18 @@
 import React from "react";
-import TopNavigation from "components/TopNavigationBar";
-import PhotoList from "components/PhotoList";
+import TopNavigationBar from "./TopNavigationBar";
+import PhotoList from "./PhotoList";
+import PropTypes from "prop-types";
 
-const HomeRoute = () => {
-    return (
-        <div className="home-route">
-            <TopNavigation />
-            <PhotoList />
-        </div>
-    );
+const HomeRoute = ({ photos, topics }) => (
+    <div className="HomeRoute">
+        <TopNavigationBar topics={topics} />
+        <PhotoList photos={photos} />
+    </div>
+);
+
+HomeRoute.propTypes = {
+    photos: PropTypes.array.isRequired,
+    topics: PropTypes.array.isRequired,
 };
 
 export default HomeRoute;
