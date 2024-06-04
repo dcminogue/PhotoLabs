@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 const HomeRoute = ({ photos, topics, toggleFavPhoto, favPhotos }) => (
     <div className="HomeRoute">
-        <TopNavigationBar topics={topics} />
+        <TopNavigationBar topics={topics} favPhotos={favPhotos} />
         <PhotoList
             photos={photos}
             toggleFavPhoto={toggleFavPhoto}
