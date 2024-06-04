@@ -4,7 +4,7 @@ import { FavPhotosContext } from "../globalstate/FavPhotosContext";
 import PhotoFavButton from "./PhotoFavButton";
 import "../styles/PhotoListItem.scss";
 
-const PhotoListItem = ({ photo }) => {
+const PhotoListItem = ({ photo, onPhotoClick }) => {
     const { favPhotos, toggleFavPhoto } = useContext(FavPhotosContext);
     const isInitiallyFav = favPhotos.some(favPhoto => favPhoto.id === photo.id);
 
@@ -33,7 +33,7 @@ const PhotoListItem = ({ photo }) => {
     } = photo;
 
     return (
-        <div className="photo-list__item">
+        <div className="photo-list__item" onClick={() => onPhotoClick(photo)}>
             <div className="photo-list_image_block">
                 <PhotoFavButton
                     onFavouriteChange={handleFavButtonClick}
@@ -78,6 +78,7 @@ PhotoListItem.propTypes = {
             profile: PropTypes.string.isRequired,
         }).isRequired,
     }).isRequired,
+    onPhotoClick: PropTypes.func.isRequired,
 };
 
 export default PhotoListItem;

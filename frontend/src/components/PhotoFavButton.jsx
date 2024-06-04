@@ -16,6 +16,7 @@ const PhotoFavButton = ({ initialSelected, onFavouriteChange }) => {
 
     return (
         <button
+            className="img-fav-btn"
             onClick={handleClick}
             style={{ background: "none", border: "none", cursor: "pointer" }}
         >

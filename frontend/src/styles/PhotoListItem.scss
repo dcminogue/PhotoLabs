@@ -1,5 +1,5 @@
 .photo-list__item {
-    margin: 20px;
+    margin: 0px;
     padding: 20px;
     border: 1px solid lightgray;
     border-radius: 10px;
@@ -10,6 +10,17 @@
     width: 210px;
     height: 280px;
 }
+
+.photo-list_image_block {
+    position: relative;
+}
+
+.img-fav-btn {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
 .photo-list__user-container {
     display: flex;
 }
@@ -19,7 +30,6 @@
     height: 200px;
     object-fit: cover;
     border-radius: 10px;
-    margin-right: 20px;
 }
 
 .photo-list__user-profile {
@@ -44,4 +54,5 @@
 .photo-list__user-location {
     font-size: 16px;
     color: #666;
+    margin-top: 5px;
 }
