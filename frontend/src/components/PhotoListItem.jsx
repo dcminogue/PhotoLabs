@@ -1,9 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { FavPhotosContext } from "../globalstate/FavPhotosContext";
 import PhotoFavButton from "./PhotoFavButton";
 import "../styles/PhotoListItem.scss";
 
 const PhotoListItem = ({ photo }) => {
+    const { favPhotos, toggleFavPhoto } = useContext(FavPhotosContext);
+    const isInitiallyFav = favPhotos.some(favPhoto => favPhoto.id === photo.id);
+
+    const [isFav, setIsFav] = useState(isInitiallyFav);
+
+    useEffect(() => {
+        setIsFav(isInitiallyFav);
+    }, [isInitiallyFav]);
+
+    const handleFavButtonClick = isSelected => {
+        setIsFav(isSelected);
+        toggleFavPhoto(photo);
+    };
+
     if (!photo) {
         return (
             <div className="photo-list__item--error">Photo not available</div>
@@ -16,22 +31,6 @@ const PhotoListItem = ({ photo }) => {
         urls: { regular: imageSource = "default-image.jpg" } = {},
         user: { name = "Unknown User", profile = "default-profile.jpg" } = {},
     } = photo;
-
-    const [isFav, setIsFav] = useState(false);
-
-    const handleFavButtonClick = isSelected => {
-        setIsFav(isSelected);
-        // Perform any additional action when the favorite button is clicked
-        updateFavoriteStatus(id, isSelected);
-    };
-
-    const updateFavoriteStatus = (photoId, isFavorited) => {
-        // Example implementation of updating favorite status
-        console.log(
-            `Photo ${photoId} favorite status updated to: ${isFavorited}`
-        );
-        // This is where you would make an API call or update global state
-    };
 
     return (
         <div className="photo-list__item">
