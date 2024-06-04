@@ -1,14 +1,14 @@
 import React from "react";
-import TopNavigationBar from "components/TopNavigationBar";
-import PhotoList from "components/PhotoList";
 import PropTypes from "prop-types";
+import TopNavigationBar from "../components/TopNavigationBar";
+import PhotoList from "../components/PhotoList";
 
 const HomeRoute = ({
     photos,
     topics,
     toggleFavPhoto,
     favPhotos,
-    onPhotoClick,
+    openModal,
 }) => (
     <div className="HomeRoute">
         <TopNavigationBar topics={topics} favPhotos={favPhotos} />
@@ -16,7 +16,7 @@ const HomeRoute = ({
             photos={photos}
             toggleFavPhoto={toggleFavPhoto}
             favPhotos={favPhotos}
-            onPhotoClick={onPhotoClick}
+            openModal={openModal}
         />
     </div>
 );
@@ -26,7 +26,7 @@ HomeRoute.propTypes = {
     topics: PropTypes.array.isRequired,
     toggleFavPhoto: PropTypes.func.isRequired,
     favPhotos: PropTypes.array.isRequired,
-    onPhotoClick: PropTypes.func.isRequired,
+    openModal: PropTypes.func.isRequired,
 };
 
 export default HomeRoute;
