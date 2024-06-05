@@ -9,12 +9,12 @@
     background-color: #f9f9f9;
     width: 210px;
     height: 280px;
-    position: relative; /* Ensures child elements can be absolutely positioned */
+    position: relative;
 }
 
 .photo-list_image_block {
     position: relative;
-    cursor: pointer; /* Indicates that the image block is clickable */
+    cursor: pointer;
 }
 
 .photo-list__image {

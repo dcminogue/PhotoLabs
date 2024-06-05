@@ -46,6 +46,9 @@ const App = () => {
                 <PhotoDetailsModal
                     photo={selectedPhoto}
                     closeModal={closeModal}
+                    toggleFavPhoto={toggleFavPhoto}
+                    favPhotos={favPhotos}
+                    openModal={openModal}
                 />
             )}
         </FavPhotosProvider>

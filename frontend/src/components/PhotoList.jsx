@@ -11,7 +11,10 @@ const PhotoList = ({ photos, toggleFavPhoto, favPhotos, openModal }) => {
                     key={photo.id}
                     photo={photo}
                     toggleFavPhoto={toggleFavPhoto}
-                    isFav={favPhotos.some(favPhoto => favPhoto.id === photo.id)}
+                    isFav={
+                        favPhotos &&
+                        favPhotos.some(favPhoto => favPhoto.id === photo.id)
+                    }
                     openModal={openModal}
                 />
             ))}

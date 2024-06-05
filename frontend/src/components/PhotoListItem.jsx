@@ -15,7 +15,7 @@ const PhotoListItem = ({ photo, openModal }) => {
     }, [isInitiallyFav]);
 
     const handleFavButtonClick = event => {
-        event.stopPropagation(); // Prevent event bubbling
+        event.stopPropagation();
         toggleFavPhoto(photo);
     };
 
