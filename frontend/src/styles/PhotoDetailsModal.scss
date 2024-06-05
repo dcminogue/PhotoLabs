@@ -44,14 +44,14 @@
 
 .photo-details-modal__image {
     max-width: 100%;
-    max-height: 50vh; /* Restrict the image height */
+    max-height: 50vh;
     margin-bottom: 20px;
 }
 
 .photo-details-modal__fav-button {
     position: absolute;
     top: 10px;
-    left: 10px; /* Change to left */
+    left: 10px; /* Position at top left */
     background: none;
     border: none;
     cursor: pointer;

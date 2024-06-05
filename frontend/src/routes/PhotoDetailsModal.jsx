@@ -21,7 +21,8 @@ const PhotoDetailsModal = ({
         similar_photos = [],
     } = photo;
 
-    const isFav = favPhotos.some(favPhoto => favPhoto.id === photo.id);
+    const isFavourite = photoId =>
+        favPhotos.some(favPhoto => favPhoto.id === photoId);
 
     return (
         <div className="photo-details-modal">
@@ -41,7 +42,7 @@ const PhotoDetailsModal = ({
                     <div className="photo-details-modal__fav-button">
                         <PhotoFavButton
                             onFavouriteChange={() => toggleFavPhoto(photo)}
-                            initialSelected={isFav}
+                            initialSelected={isFavourite(photo.id)}
                         />
                     </div>
                 </div>
@@ -68,9 +69,7 @@ const PhotoDetailsModal = ({
                                 key={similarPhoto.id}
                                 photo={similarPhoto}
                                 toggleFavPhoto={toggleFavPhoto}
-                                isFav={favPhotos.some(
-                                    favPhoto => favPhoto.id === similarPhoto.id
-                                )}
+                                isFav={isFavourite(similarPhoto.id)}
                                 openModal={openModal}
                             />
                         ))}
