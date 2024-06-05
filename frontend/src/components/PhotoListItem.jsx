@@ -14,7 +14,8 @@ const PhotoListItem = ({ photo, openModal }) => {
         setIsFav(isInitiallyFav);
     }, [isInitiallyFav]);
 
-    const handleFavButtonClick = () => {
+    const handleFavButtonClick = event => {
+        event.stopPropagation(); // Prevent event bubbling
         toggleFavPhoto(photo);
     };
 
@@ -32,11 +33,8 @@ const PhotoListItem = ({ photo, openModal }) => {
     } = photo;
 
     return (
-        <div className="photo-list__item">
-            <div
-                className="photo-list_image_block"
-                onClick={() => openModal(photo)}
-            >
+        <div className="photo-list__item" onClick={() => openModal(photo)}>
+            <div className="photo-list_image_block">
                 <PhotoFavButton
                     onFavouriteChange={handleFavButtonClick}
                     initialSelected={isFav}
