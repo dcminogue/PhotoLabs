@@ -1,23 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import photosData from "mocks/photos";
 import topicsData from "mocks/topics";
 
 const useApplicationData = () => {
-    const [photos, setPhotos] = useState([]);
-    const [topics, setTopics] = useState([]);
-    const [favPhotos, setFavPhotos] = useState([]);
+    const [photos] = useState(photosData);
+    const [topics] = useState(topicsData);
+    const [favPhotoIds, setFavPhotoIds] = useState([]);
     const [selectedPhoto, setSelectedPhoto] = useState(null);
 
-    useEffect(() => {
-        setPhotos(photosData);
-        setTopics(topicsData);
-    }, []);
-
-    const toggleFavPhoto = photo => {
-        setFavPhotos(prevFavPhotos =>
-            prevFavPhotos.some(favPhoto => favPhoto.id === photo.id)
-                ? prevFavPhotos.filter(favPhoto => favPhoto.id !== photo.id)
-                : [...prevFavPhotos, photo]
+    const toggleFavPhoto = photoId => {
+        setFavPhotoIds(prevFavPhotoIds =>
+            prevFavPhotoIds.includes(photoId)
+                ? prevFavPhotoIds.filter(id => id !== photoId)
+                : [...prevFavPhotoIds, photoId]
         );
     };
 
@@ -30,7 +25,7 @@ const useApplicationData = () => {
     };
 
     return {
-        state: { photos, topics, favPhotos, selectedPhoto },
+        state: { photos, topics, favPhotoIds, selectedPhoto },
         updateToFavPhotoIds: toggleFavPhoto,
         onPhotoSelect: openModal,
         onClosePhotoDetailsModal: closeModal,
