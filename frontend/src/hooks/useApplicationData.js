@@ -68,26 +68,28 @@ const useApplicationData = () => {
         fetch("/api/photos")
             .then(response => {
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    throw new Error("Network response was not ok");
                 }
                 return response.json();
             })
             .then(data =>
                 dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data })
             )
-            .catch(error => console.error("Error fetching photos:", error));
+            .catch(error => console.error("Error fetching photos: ", error));
+    }, []);
 
+    useEffect(() => {
         fetch("/api/topics")
             .then(response => {
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    throw new Error("Network response was not ok");
                 }
                 return response.json();
             })
             .then(data =>
                 dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data })
             )
-            .catch(error => console.error("Error fetching topics:", error));
+            .catch(error => console.error("Error fetching topics: ", error));
     }, []);
 
     const toggleFavPhoto = photoId => {
