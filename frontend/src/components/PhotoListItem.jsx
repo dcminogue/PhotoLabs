@@ -65,7 +65,8 @@ const PhotoListItem = ({ photo, openModal }) => {
 
 PhotoListItem.propTypes = {
     photo: PropTypes.shape({
-        id: PropTypes.string.isRequired,
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+            .isRequired, // Accept both string and number
         location: PropTypes.shape({
             city: PropTypes.string.isRequired,
             country: PropTypes.string.isRequired,

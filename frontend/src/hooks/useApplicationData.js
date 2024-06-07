@@ -1,6 +1,4 @@
 import { useReducer, useEffect } from "react";
-import photosData from "mocks/photos";
-import topicsData from "mocks/topics";
 
 // Define the actions
 export const ACTIONS = {
@@ -67,8 +65,29 @@ const useApplicationData = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
-        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: photosData });
-        dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: topicsData });
+        fetch("/api/photos")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data =>
+                dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data })
+            )
+            .catch(error => console.error("Error fetching photos:", error));
+
+        fetch("/api/topics")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data =>
+                dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data })
+            )
+            .catch(error => console.error("Error fetching topics:", error));
     }, []);
 
     const toggleFavPhoto = photoId => {

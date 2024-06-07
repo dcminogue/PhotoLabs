@@ -64,7 +64,7 @@ const PhotoDetailsModal = ({
                         Similar Photos
                     </p>
                     <div className="photo-details-modal__similar-photos-grid">
-                        {Object.values(similar_photos).map(similarPhoto => (
+                        {similar_photos.map(similarPhoto => (
                             <PhotoListItem
                                 key={similarPhoto.id}
                                 photo={similarPhoto}
@@ -93,7 +93,7 @@ PhotoDetailsModal.propTypes = {
             city: PropTypes.string.isRequired,
             country: PropTypes.string.isRequired,
         }).isRequired,
-        similar_photos: PropTypes.object.isRequired,
+        similar_photos: PropTypes.array.isRequired,
     }).isRequired,
     closeModal: PropTypes.func.isRequired,
     toggleFavPhoto: PropTypes.func.isRequired,
