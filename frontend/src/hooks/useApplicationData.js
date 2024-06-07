@@ -9,6 +9,7 @@ export const ACTIONS = {
     SELECT_PHOTO: "SELECT_PHOTO",
     DISPLAY_PHOTO_DETAILS: "DISPLAY_PHOTO_DETAILS",
     CLOSE_PHOTO_DETAILS: "CLOSE_PHOTO_DETAILS",
+    SET_ERROR: "SET_ERROR",
 };
 
 // Create the reducer function
@@ -30,11 +31,13 @@ function reducer(state, action) {
             return {
                 ...state,
                 photos: action.payload,
+                error: null,
             };
         case ACTIONS.SET_TOPIC_DATA:
             return {
                 ...state,
                 topics: action.payload,
+                error: null,
             };
         case ACTIONS.SELECT_PHOTO:
             return {
@@ -46,12 +49,31 @@ function reducer(state, action) {
                 ...state,
                 selectedPhoto: null,
             };
+        case ACTIONS.SET_ERROR:
+            return {
+                ...state,
+                error: action.payload,
+            };
         default:
             throw new Error(
                 `Tried to reduce with unsupported action type: ${action.type}`
             );
     }
 }
+
+// Create a helper function for fetching data
+const fetchData = async (url, actionType, dispatch) => {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        dispatch({ type: actionType, payload: data });
+    } catch (error) {
+        dispatch({ type: ACTIONS.SET_ERROR, payload: error.message });
+    }
+};
 
 // Implement the useApplicationData hook
 const useApplicationData = () => {
@@ -60,36 +82,17 @@ const useApplicationData = () => {
         topics: [],
         favPhotoIds: [],
         selectedPhoto: null,
+        error: null,
     };
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
-        fetch("/api/photos")
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                return response.json();
-            })
-            .then(data =>
-                dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data })
-            )
-            .catch(error => console.error("Error fetching photos: ", error));
+        fetchData("/api/photos", ACTIONS.SET_PHOTO_DATA, dispatch);
     }, []);
 
     useEffect(() => {
-        fetch("/api/topics")
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                return response.json();
-            })
-            .then(data =>
-                dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data })
-            )
-            .catch(error => console.error("Error fetching topics: ", error));
+        fetchData("/api/topics", ACTIONS.SET_TOPIC_DATA, dispatch);
     }, []);
 
     const toggleFavPhoto = photoId => {
