@@ -10,6 +10,8 @@ export const ACTIONS = {
     DISPLAY_PHOTO_DETAILS: "DISPLAY_PHOTO_DETAILS",
     CLOSE_PHOTO_DETAILS: "CLOSE_PHOTO_DETAILS",
     SET_ERROR: "SET_ERROR",
+    SET_CURRENT_TOPIC: "SET_CURRENT_TOPIC",
+    SET_PHOTOS_BY_TOPIC: "SET_PHOTOS_BY_TOPIC",
 };
 
 // Create the reducer function
@@ -54,6 +56,17 @@ function reducer(state, action) {
                 ...state,
                 error: action.payload,
             };
+        case ACTIONS.SET_CURRENT_TOPIC:
+            return {
+                ...state,
+                currentTopic: action.payload,
+            };
+        case ACTIONS.SET_PHOTOS_BY_TOPIC:
+            return {
+                ...state,
+                photos: action.payload,
+                error: null,
+            };
         default:
             throw new Error(
                 `Tried to reduce with unsupported action type: ${action.type}`
@@ -83,6 +96,7 @@ const useApplicationData = () => {
         favPhotoIds: [],
         selectedPhoto: null,
         error: null,
+        currentTopic: null,
     };
 
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -111,11 +125,32 @@ const useApplicationData = () => {
         dispatch({ type: ACTIONS.CLOSE_PHOTO_DETAILS });
     };
 
+    const fetchPhotosByTopic = async topicId => {
+        try {
+            const response = await fetch(
+                `http://localhost:8001/api/topics/photos/${topicId}`
+            );
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            dispatch({ type: ACTIONS.SET_PHOTOS_BY_TOPIC, payload: data });
+        } catch (error) {
+            dispatch({ type: ACTIONS.SET_ERROR, payload: error.message });
+        }
+    };
+
+    const setCurrentTopic = topicId => {
+        dispatch({ type: ACTIONS.SET_CURRENT_TOPIC, payload: topicId });
+        fetchPhotosByTopic(topicId);
+    };
+
     return {
         state,
         updateToFavPhotoIds: toggleFavPhoto,
         onPhotoSelect: openModal,
         onClosePhotoDetailsModal: closeModal,
+        setCurrentTopic,
     };
 };
 

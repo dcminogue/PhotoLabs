@@ -9,9 +9,14 @@ const HomeRoute = ({
     toggleFavPhoto,
     favPhotos,
     openModal,
+    onTopicSelect,
 }) => (
     <div className="HomeRoute">
-        <TopNavigationBar topics={topics} favPhotos={favPhotos} />
+        <TopNavigationBar
+            topics={topics}
+            favPhotos={favPhotos}
+            onTopicSelect={onTopicSelect}
+        />
         <PhotoList
             photos={photos}
             toggleFavPhoto={toggleFavPhoto}
@@ -27,6 +32,7 @@ HomeRoute.propTypes = {
     toggleFavPhoto: PropTypes.func.isRequired,
     favPhotos: PropTypes.array.isRequired,
     openModal: PropTypes.func.isRequired,
+    onTopicSelect: PropTypes.func.isRequired,
 };
 
 export default HomeRoute;

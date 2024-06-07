@@ -10,6 +10,7 @@ const App = () => {
         onPhotoSelect,
         updateToFavPhotoIds,
         onClosePhotoDetailsModal,
+        setCurrentTopic,
     } = useApplicationData();
 
     return (
@@ -22,6 +23,7 @@ const App = () => {
                     favPhotoIds.includes(photo.id)
                 )}
                 openModal={onPhotoSelect}
+                onTopicSelect={setCurrentTopic} // Pass setCurrentTopic
             />
             {selectedPhoto && (
                 <PhotoDetailsModal
