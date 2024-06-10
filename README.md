@@ -1,7 +1,10 @@
 # react-photolabs
+
 The PhotoLabs project for the Web Development React course programming.
 
-# Photolabs
+# Photolabs Description
+
+Photolabs is a React based project for displaying photos on a webpage.
 
 ## Setup
 
@@ -22,3 +25,25 @@ Read `backend/readme` for further setup details.
 cd backend
 npm start
 ```
+
+## Screen Shots
+
+Home Page
+
+![Home Page](./img/Photolabs-Homepage.png)
+
+Nav Bar
+
+![Navigation Bar](./img/Photolabs-NavBar.png)
+
+Favorited Picture
+
+![Favorited Picture](./img/Photolabs-Favorited-Picture.png)
+
+Modal Main Picture
+
+![Modal Main Picture](./img/Photolabs-Modal-Main-Photo.png)
+
+Similar Photos Gallery
+
+![Similar Photos](./img/Photolabs-Similar-Photos-Grid.png)
