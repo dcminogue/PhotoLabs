@@ -13,6 +13,13 @@ const App = () => {
         setCurrentTopic,
     } = useApplicationData();
 
+    const handlePhotoSelect = photo => {
+        const similar_photos = photos
+            .filter(p => p.id !== photo.id)
+            .slice(0, 8);
+        onPhotoSelect({ ...photo, similar_photos });
+    };
+
     return (
         <FavPhotosProvider>
             <HomeRoute
@@ -22,18 +29,14 @@ const App = () => {
                 favPhotos={photos.filter(photo =>
                     favPhotoIds.includes(photo.id)
                 )}
-                openModal={onPhotoSelect}
-                onTopicSelect={setCurrentTopic} // Pass setCurrentTopic
+                openModal={handlePhotoSelect}
+                onTopicSelect={setCurrentTopic}
             />
             {selectedPhoto && (
                 <PhotoDetailsModal
                     photo={selectedPhoto}
                     closeModal={onClosePhotoDetailsModal}
-                    toggleFavPhoto={updateToFavPhotoIds}
-                    favPhotos={photos.filter(photo =>
-                        favPhotoIds.includes(photo.id)
-                    )}
-                    openModal={onPhotoSelect}
+                    openModal={handlePhotoSelect}
                 />
             )}
         </FavPhotosProvider>

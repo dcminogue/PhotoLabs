@@ -1,6 +1,5 @@
 import { useReducer, useEffect } from "react";
 
-// Define the actions
 export const ACTIONS = {
     FAV_PHOTO_ADDED: "FAV_PHOTO_ADDED",
     FAV_PHOTO_REMOVED: "FAV_PHOTO_REMOVED",
@@ -14,7 +13,6 @@ export const ACTIONS = {
     SET_PHOTOS_BY_TOPIC: "SET_PHOTOS_BY_TOPIC",
 };
 
-// Create the reducer function
 function reducer(state, action) {
     switch (action.type) {
         case ACTIONS.FAV_PHOTO_ADDED:
@@ -74,7 +72,6 @@ function reducer(state, action) {
     }
 }
 
-// Create a helper function for fetching data
 const fetchData = async (url, actionType, dispatch) => {
     try {
         const response = await fetch(url);
@@ -88,7 +85,6 @@ const fetchData = async (url, actionType, dispatch) => {
     }
 };
 
-// Implement the useApplicationData hook
 const useApplicationData = () => {
     const initialState = {
         photos: [],
