@@ -5,6 +5,7 @@ import { FavPhotosProvider } from "globalstate/FavPhotosContext";
 import useApplicationData from "hooks/useApplicationData";
 
 const App = () => {
+    // Destructure state and action functions from the custom hook
     const {
         state: { photos, topics, favPhotoIds, selectedPhoto },
         onPhotoSelect,
@@ -13,15 +14,9 @@ const App = () => {
         setCurrentTopic,
     } = useApplicationData();
 
-    const handlePhotoSelect = photo => {
-        const similar_photos = photos
-            .filter(p => p.id !== photo.id)
-            .slice(0, 8);
-        onPhotoSelect({ ...photo, similar_photos });
-    };
-
     return (
         <FavPhotosProvider>
+            {/* Render the HomeRoute component with necessary props */}
             <HomeRoute
                 photos={photos}
                 topics={topics}
@@ -29,14 +24,15 @@ const App = () => {
                 favPhotos={photos.filter(photo =>
                     favPhotoIds.includes(photo.id)
                 )}
-                openModal={handlePhotoSelect}
+                openModal={onPhotoSelect}
                 onTopicSelect={setCurrentTopic}
             />
+            {/* Conditionally render the PhotoDetailsModal if a photo is selected */}
             {selectedPhoto && (
                 <PhotoDetailsModal
                     photo={selectedPhoto}
                     closeModal={onClosePhotoDetailsModal}
-                    openModal={handlePhotoSelect}
+                    openModal={onPhotoSelect}
                 />
             )}
         </FavPhotosProvider>

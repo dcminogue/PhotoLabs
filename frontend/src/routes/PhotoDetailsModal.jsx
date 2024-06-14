@@ -7,23 +7,21 @@ import "../styles/PhotoDetailsModal.scss";
 import closeSymbol from "../assets/closeSymbol.svg";
 
 const PhotoDetailsModal = ({ photo, closeModal, openModal }) => {
+    // Get favorite photos context and actions
     const { favPhotos, toggleFavPhoto } = useContext(FavPhotosContext);
 
+    // State to manage the current photo displayed in the modal
     const [currentPhoto, setCurrentPhoto] = useState(photo);
 
+    // Update current photo when the provided photo prop changes
     useEffect(() => {
         setCurrentPhoto(photo);
     }, [photo]);
 
-    useEffect(() => {
-        console.log(
-            "Current Photo Similar Photos:",
-            currentPhoto.similar_photos
-        );
-    }, [currentPhoto]);
-
+    // If no photo is selected, return null to prevent rendering
     if (!currentPhoto) return null;
 
+    // Destructure necessary fields from the current photo object
     const {
         urls: { full },
         user: { name, profile },
@@ -31,35 +29,43 @@ const PhotoDetailsModal = ({ photo, closeModal, openModal }) => {
         similar_photos = [],
     } = currentPhoto;
 
+    // Determine if the current photo is initially a favorite
     const isInitiallyFav = favPhotos.some(
         favPhoto => favPhoto.id === currentPhoto.id
     );
+
+    // State to manage the favorite status of the current photo
     const [isFav, setIsFav] = useState(isInitiallyFav);
 
+    // Update favorite status state when initial favorite status changes
     useEffect(() => {
         setIsFav(isInitiallyFav);
     }, [isInitiallyFav]);
 
+    // Handler for the favorite button click event
     const handleFavButtonClick = event => {
         event.stopPropagation();
         toggleFavPhoto(currentPhoto);
         setIsFav(!isFav);
     };
 
+    // Handler for when a similar photo is clicked
     const handleSimilarPhotoClick = similarPhoto => {
-        setCurrentPhoto(similarPhoto);
         openModal(similarPhoto);
     };
 
     return (
         <div className="photo-details-modal">
             <div className="photo-details-modal__content">
+                {/* Close button for the modal */}
                 <button
                     className="photo-details-modal__close-button"
                     onClick={closeModal}
                 >
                     <img src={closeSymbol} alt="close symbol" />
                 </button>
+
+                {/* Main image container */}
                 <div className="photo-details-modal__image-container">
                     <img
                         src={full}
@@ -73,6 +79,8 @@ const PhotoDetailsModal = ({ photo, closeModal, openModal }) => {
                         />
                     </div>
                 </div>
+
+                {/* User information container */}
                 <div className="photo-details-modal__info">
                     <img
                         src={profile}
@@ -86,6 +94,8 @@ const PhotoDetailsModal = ({ photo, closeModal, openModal }) => {
                         </p>
                     </div>
                 </div>
+
+                {/* Similar photos section */}
                 {similar_photos.length > 0 && (
                     <div className="photo-details-modal__similar-photos">
                         <p className="photo-details-modal__similar-photos-title">

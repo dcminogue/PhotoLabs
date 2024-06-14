@@ -5,26 +5,34 @@ import PhotoFavButton from "./PhotoFavButton";
 import "../styles/PhotoListItem.scss";
 
 const PhotoListItem = ({ photo, openModal }) => {
+    // Access favorite photos context
     const { favPhotos, toggleFavPhoto } = useContext(FavPhotosContext);
+
+    // Check if the current photo is a favorite
     const isInitiallyFav = favPhotos.some(favPhoto => favPhoto.id === photo.id);
 
+    // State to track if the photo is a favorite
     const [isFav, setIsFav] = useState(isInitiallyFav);
 
+    // Sync state with context updates
     useEffect(() => {
         setIsFav(isInitiallyFav);
     }, [isInitiallyFav]);
 
+    // Handle favorite button click event
     const handleFavButtonClick = event => {
         event.stopPropagation();
         toggleFavPhoto(photo);
     };
 
+    // Handle case when photo data is not available
     if (!photo) {
         return (
             <div className="photo-list__item--error">Photo not available</div>
         );
     }
 
+    // Destructure photo data with default values
     const {
         id = "N/A",
         location: { city = "Unknown City", country = "Unknown Country" } = {},
@@ -64,6 +72,7 @@ const PhotoListItem = ({ photo, openModal }) => {
 };
 
 PhotoListItem.propTypes = {
+    // Define prop types for the photo object
     photo: PropTypes.shape({
         id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
             .isRequired,
@@ -79,6 +88,7 @@ PhotoListItem.propTypes = {
             profile: PropTypes.string.isRequired,
         }).isRequired,
     }).isRequired,
+    // Define prop type for the openModal function
     openModal: PropTypes.func.isRequired,
 };
 

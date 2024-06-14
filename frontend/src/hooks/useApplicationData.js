@@ -1,5 +1,6 @@
 import { useReducer, useEffect } from "react";
 
+// Define action types for the reducer
 export const ACTIONS = {
     FAV_PHOTO_ADDED: "FAV_PHOTO_ADDED",
     FAV_PHOTO_REMOVED: "FAV_PHOTO_REMOVED",
@@ -13,6 +14,7 @@ export const ACTIONS = {
     SET_PHOTOS_BY_TOPIC: "SET_PHOTOS_BY_TOPIC",
 };
 
+// Reducer function to manage state transitions based on action types
 function reducer(state, action) {
     switch (action.type) {
         case ACTIONS.FAV_PHOTO_ADDED:
@@ -72,6 +74,7 @@ function reducer(state, action) {
     }
 }
 
+// Helper function to fetch data and dispatch appropriate actions
 const fetchData = async (url, actionType, dispatch) => {
     try {
         const response = await fetch(url);
@@ -85,7 +88,9 @@ const fetchData = async (url, actionType, dispatch) => {
     }
 };
 
+// Custom hook to manage application data
 const useApplicationData = () => {
+    // Initial state for the reducer
     const initialState = {
         photos: [],
         topics: [],
@@ -95,16 +100,20 @@ const useApplicationData = () => {
         currentTopic: null,
     };
 
+    // useReducer hook to manage complex state logic
     const [state, dispatch] = useReducer(reducer, initialState);
 
+    // useEffect to fetch initial photo data
     useEffect(() => {
         fetchData("/api/photos", ACTIONS.SET_PHOTO_DATA, dispatch);
     }, []);
 
+    // useEffect to fetch initial topic data
     useEffect(() => {
         fetchData("/api/topics", ACTIONS.SET_TOPIC_DATA, dispatch);
     }, []);
 
+    // Function to toggle a photo as favorite
     const toggleFavPhoto = photoId => {
         if (state.favPhotoIds.includes(photoId)) {
             dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, payload: photoId });
@@ -113,14 +122,17 @@ const useApplicationData = () => {
         }
     };
 
+    // Function to open the modal with selected photo
     const openModal = photo => {
         dispatch({ type: ACTIONS.SELECT_PHOTO, payload: photo });
     };
 
+    // Function to close the photo details modal
     const closeModal = () => {
         dispatch({ type: ACTIONS.CLOSE_PHOTO_DETAILS });
     };
 
+    // Function to fetch photos by topic
     const fetchPhotosByTopic = async topicId => {
         try {
             const response = await fetch(
@@ -136,6 +148,7 @@ const useApplicationData = () => {
         }
     };
 
+    // Function to set the current topic and fetch associated photos
     const setCurrentTopic = topicId => {
         dispatch({ type: ACTIONS.SET_CURRENT_TOPIC, payload: topicId });
         fetchPhotosByTopic(topicId);
