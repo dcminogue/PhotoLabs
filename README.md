@@ -12,7 +12,7 @@ Install dependencies with `npm install` in each respective `/frontend` and `/bac
 
 #### Frontend Dependencies
 
-````json
+```json
  "dependencies": {
         "@testing-library/jest-dom": "^5.16.5",
         "@testing-library/react": "^13.4.0",
@@ -21,10 +21,12 @@ Install dependencies with `npm install` in each respective `/frontend` and `/bac
         "react-dom": "^18.2.0",
         "react-scripts": "^5.0.1",
         "web-vitals": "^2.1.4"
-    },
+    }
+```
 
 #### Backend Dependencies
 
+```json
  "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
@@ -34,16 +36,17 @@ Install dependencies with `npm install` in each respective `/frontend` and `/bac
     "pg": "^8.5.0",
     "socket.io": "^2.2.0",
     "ws": "^7.0.0"
-  },
+  }
+```
 
-## [Frontend] Running Webpack Development Server
+#### [Frontend] Running Webpack Development Server
 
 ```sh
 cd frontend
 npm start
-````
+```
 
-## [Backend] Running Backend Servier
+## [Backend] Running Backend Server
 
 Read `backend/readme` for further setup details.
 
